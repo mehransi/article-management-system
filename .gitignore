@@ -1,0 +1,29 @@
+.idea/
+
+__pycache__/
+
+dist/
+eggs/
+.eggs/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# pyenv
+.python-version
+
+# Environments
+.env
+.venv
+env/
+venv/
+
+### VisualStudioCode ###
+.vscode/
+!.vscode/
+*.code-workspace
+
+# Local History for Visual Studio Code
+.history/
+
+# End of https://www.toptal.com/developers/gitignore/api/pycharm,visualstudiocode,python
