@@ -26,4 +26,5 @@ venv/
 # Local History for Visual Studio Code
 .history/
 
+db.sqlite3
 # End of https://www.toptal.com/developers/gitignore/api/pycharm,visualstudiocode,python

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Author Search{% endblock %}
+{% block body %}
+    <div>
+        <form method="get">
+            <input name="term" placeholder="Search authors"/>
+        </form>
+        <br/>
+        <div>
+            {% if authors %}
+                {% for author in authors %}
+                    <p>
+                        <a href="{% url 'account:detail' author.id %}">{{ author.full_name }}</a>
+                        <br/>
+                        {{ author.headline }}
+                    </p>
+                {% endfor %}
+            {% else %}
+                {% if request.GET.term %}
+                    No result found for "{{ request.GET.term }}"
+                {% else %}
+                    Search the authors
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock body %}

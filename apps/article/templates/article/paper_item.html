@@ -1,0 +1,11 @@
+<div>
+    <p>
+        {{ paper.title }}
+        <span>
+            {% if paper.file %}<a href="{{ paper.file }}" target="_blank" rel="noreferrer">[Download]</a>{% endif %}
+        </span>
+    </p>
+    <p style="color: gray">
+        {% for author in paper.authors %}{{ author.full_name }}{% if not forloop.last %}, {% endif %}{% endfor %}
+    </p>
+</div>

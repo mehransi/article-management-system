@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}{{ author.full_name}}{% endblock %}
+{% block body %}
+    <div>
+        {% if author.avatar %}
+            <img alt="{{ author.full_name }}" src="{{ author.avatar }}"/>
+        {% endif %}
+        <p>
+            {{ author.full_name }}
+            <br/>
+            {{ author.headline }}
+        </p>
+        {% if author.website %}
+            <p>
+                website:
+                <a href="{{ author.website }}" target="_blank" rel="noreferrer">{{ author.website }}</a>
+            </p>
+        {% endif %}
+        {% if author.email_domain %}
+            Verified email at {{ author.email_domain }}
+        {% endif %}
+        {% if author.tags %}
+            <p>
+                {% for tag in author.tags %}
+                    {{ tag }}{% if not forloop.last %},{% endif %}
+                {% endfor %}
+            </p>
+        {% endif %}
+        {% if author.papers %}
+            <hr/>
+            {% for paper in author.papers %}
+                {% include "article/paper_item.html" with paper=paper %}
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}
