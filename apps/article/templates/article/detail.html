@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Article Detail{% endblock title %}
+
+{% block body %}
+    <div>
+        <h2>{{ paper.title }}</h2>
+        {% if paper.publication.title %}
+            <div>publication: {{ paper.publication.title }}</div>
+        {% endif %}
+        {% if paper.publication.year %}
+            <div>year: {{ paper.publication.year }}</div>
+        {% endif %}
+        {% if paper.file %}
+            <div>file: <a href="{{ paper.file }}" target="_blank" rel="noreferrer">{{ paper.file }}</a></div>
+        {% endif %}
+        {% if paper.authors %}
+            <div>
+                authors:
+                {% for author in paper.authors %}
+                    <a href="{% url 'account:detail' author.id %}" style="color: gray">{{ author.full_name }}, </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <br/>
+        <p>{{ paper.snippet }}</p>
+        <div class="ui divider"></div>
+        <div>
+            <h3>citations</h3>
+            {% for citation in paper.citations %}
+                {% include 'article/paper_item.html' with paper=citation %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock body %}

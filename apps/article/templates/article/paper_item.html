@@ -1,11 +1,25 @@
-<div>
-    <p>
-        {{ paper.title }}
+<div style="width: 70%; padding: 1em 0">
+    <p style="font-size: 1.1em; margin-bottom: 0.2em">
+        <a href="{% url 'article:detail' paper.id %}">{{ paper.title }}</a>
         <span>
-            {% if paper.file %}<a href="{{ paper.file }}" target="_blank" rel="noreferrer">[Download]</a>{% endif %}
+            {% if paper.file %}
+                <a style="font-size: 0.9em" href="{{ paper.file }}" target="_blank" rel="noreferrer">
+                    &nbsp;&nbsp;&nbsp;&nbsp;[Download]
+                </a>
+            {% endif %}
         </span>
     </p>
-    <p style="color: gray">
-        {% for author in paper.authors %}{{ author.full_name }}{% if not forloop.last %}, {% endif %}{% endfor %}
+    <p style="color: gray; font-size: 0.9em; margin-bottom: 0.2em">
+        <span>
+            {% for author in paper.authors %}
+                <a style="color: gray" href="{% url 'account:detail' author.id %}">{{ author.full_name }}</a>
+                {% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </span>
+        -
+        <span>{{ paper.publication.title }}, {{ paper.publication.year }}</span>
+    </p>
+    <p style="font-size: 0.9em">
+        {{ paper.snippet }}
     </p>
 </div>

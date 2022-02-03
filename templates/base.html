@@ -1,10 +1,30 @@
-<!DOCTYPE html>
+<!DOCTYPE html>{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon.png' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
     <title>{% block title %}Article Management System{% endblock %}</title>
+    {% block extra_head %}{% endblock extra_head %}
 </head>
-<body style="padding: 2em">
+<body>
+{% block top-menu %}
+    <div class="ui menu" style="padding: .8em">
+        <a href="{% url 'article:list' %}" class="item {% block active-papers %}{% endblock active-papers %}">
+            papers
+        </a>
+        <a href="{% url 'account:list' %}" class="item {% block active-authors %}{% endblock active-authors %}">
+            authors
+        </a>
+        <div class="right menu">
+            <a href="{% url 'landing:index' %}" style="align-self: center">Article Management System</a>
+        </div>
+    </div>
+{% endblock top-menu %}
+<div class="ui container">
     {% block body %}{% endblock body %}
+</div>
 </body>
 </html>

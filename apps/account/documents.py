@@ -15,7 +15,7 @@ class User(Document):
             "institute_id": Keyword(required=True)
         }
     )
-    tags = Text(multi=True)
+    tags = Keyword(multi=True)
 
     class Index:
         name = "adb_users"
@@ -52,7 +52,7 @@ class Institute(Document):
 
 
 class Tag(Document):
-    name = Text(required=True)
+    name = Keyword(required=True)
 
     class Index:
         name = "adb_tags"

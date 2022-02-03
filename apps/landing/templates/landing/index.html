@@ -1,6 +1,22 @@
 {% extends 'base.html' %}
 
+{% block extra_head %}
+    <style>
+        body {
+            background: url("https://i.pinimg.com/564x/a8/a7/21/a8a721ab1ae32f328f37f6824e1122a7.jpg") no-repeat;
+            background-size: cover;
+        }
+    </style>
+{% endblock extra_head %}
+
+{% block top-menu %}{% endblock top-menu %}
 
 {% block body %}
-    <a href="{% url 'account:list' %}">Search authors</a>
+    <div style="text-align: center; margin-top: 22em;">
+        <div style="display: flex; justify-content: space-evenly;
+         width: 800px; align-items: center; margin: auto; font-size: 1.6em;">
+            <a style="color: white" href="{% url 'article:list' %}">Search papers</a>
+            <a style="color: white" href="{% url 'account:list' %}">Search authors</a>
+        </div>
+    </div>
 {% endblock %}

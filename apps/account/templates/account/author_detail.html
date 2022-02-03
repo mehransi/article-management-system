@@ -23,12 +23,14 @@
         {% if author.tags %}
             <p>
                 {% for tag in author.tags %}
-                    {{ tag }}{% if not forloop.last %},{% endif %}
+                    <div class="ui small label">
+                        {{ tag }}
+                    </div>
                 {% endfor %}
             </p>
         {% endif %}
         {% if author.papers %}
-            <hr/>
+            <h2>papers</h2>
             {% for paper in author.papers %}
                 {% include "article/paper_item.html" with paper=paper %}
             {% endfor %}

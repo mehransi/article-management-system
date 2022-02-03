@@ -1,27 +1,47 @@
 {% extends "base.html" %}
 
 {% block title %}Author Search{% endblock %}
+
+{% block active-authors %}active{% endblock active-authors %}
+
 {% block body %}
     <div>
+        {% if not authors and not request.GET.term %}
+            <h2>Article Management System</h2>
+        {% endif %}
         <form method="get">
-            <input name="term" placeholder="Search authors"/>
+            <div class="ui action input" style="width: 40%">
+                <input value="{% if request.GET.term %}{{ request.GET.term }}{% endif %}"
+                       type="text" name="term" placeholder="Search authors">
+                <button class="ui icon button">
+                    <i class="search icon"></i>
+                </button>
+            </div>
         </form>
         <br/>
         <div>
             {% if authors %}
                 {% for author in authors %}
-                    <p>
-                        <a href="{% url 'account:detail' author.id %}">{{ author.full_name }}</a>
-                        <br/>
-                        {{ author.headline }}
-                    </p>
+                    <div style="padding: 1em 0">
+                        <a style="font-size: 1.1em" href="{% url 'account:detail' author.id %}">
+                            {{ author.full_name }}
+                        </a>
+                        <div>
+                            {{ author.headline }}
+                        </div>
+                        <div>
+                            {% for tag in author.tags %}
+                                <div class="ui tiny label">{{ tag }}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
                 {% endfor %}
             {% else %}
-                {% if request.GET.term %}
-                    No result found for "{{ request.GET.term }}"
-                {% else %}
-                    Search the authors
-                {% endif %}
+                <p style="font-size: 1.2em; margin-top: 2em">
+                    {% if request.GET.term %}
+                        No result found for "{{ request.GET.term }}"
+                    {% endif %}
+                </p>
             {% endif %}
         </div>
     </div>

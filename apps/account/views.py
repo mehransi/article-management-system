@@ -9,16 +9,26 @@ es = get_connection()
 
 def author_list_view(request):
     search_term = request.GET.get("term")
+    tags = request.GET.getlist("tags")
+    query = {}
     if search_term:
-        search = es.search(index=UserDocument.Index.name, query={
+        query = {
             "bool": {
                 "should": [
                     {"match": {"full_name": search_term}},
                     {"match": {"headline": search_term}},
                     {"wildcard": {"full_name": f"*{search_term}*"}},
-                ]
+                ],
             }
-        })
+        }
+    if tags:
+        tags = list(tags)
+        if not query:
+            query = {"bool": {}}
+        query["bool"]["filter"] = {"terms": {"tags": tags}}
+
+    if query:
+        search = es.search(index=UserDocument.Index.name, query=query)
         authors = normalize_es_response(search["hits"]["hits"])
     else:
         authors = []

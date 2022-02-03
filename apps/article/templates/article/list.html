@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Search Papers{% endblock title %}
+
+{% block active-papers %}active{% endblock active-papers %}
+
+{% block body %}
+     <div>
+        {% if not papers and not request.GET.term %}
+            <h2>Article Management System</h2>
+        {% endif %}
+        <form method="get">
+            <div class="ui action input" style="width: 40%">
+                <input value="{{ request.GET.term }}" type="text" name="term" placeholder="Search papers">
+                <button class="ui icon button">
+                    <i class="search icon"></i>
+                </button>
+            </div>
+        </form>
+        <br/>
+        <div>
+            {% if papers %}
+                {% for paper in papers %}
+                    {% include "article/paper_item.html" with paper=paper %}
+                {% endfor %}
+            {% else %}
+                <p style="font-size: 1.2em; margin-top: 2em">
+                    {% if request.GET.term %}
+                        No result found for "{{ request.GET.term }}"
+                    {% endif %}
+                </p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock body %}
