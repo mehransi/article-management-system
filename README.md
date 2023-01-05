@@ -4,6 +4,8 @@
 
 ### Technology stack: `python, elasticsearch`
 
+![EER](https://github.com/mehransi/article-management-system/raw/master/EER.png)
+
 ---
 ### Instructions
 1. `activate a python3 virtualenv`
